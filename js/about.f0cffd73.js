@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkfundraising_platform"]=self["webpackChunkfundraising_platform"]||[]).push([[594],{5609:function(n,u,a){a.r(u),a.d(u,{default:function(){return l}});var r=a(6768);const t={class:"about"},s=(0,r.Lk)("h1",null,"This is an about page",-1),e=[s];function i(n,u){return(0,r.uX)(),(0,r.CE)("div",t,e)}var f=a(1241);const c={},o=(0,f.A)(c,[["render",i]]);var l=o}}]);
+//# sourceMappingURL=about.f0cffd73.js.map
