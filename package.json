@@ -2,6 +2,7 @@
   "name": "fundraising_platform",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://i-am-nothing.github.io/Fundraising_platform/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
