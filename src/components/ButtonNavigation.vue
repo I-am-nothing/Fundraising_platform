@@ -1,6 +1,6 @@
 <template>
   <div class="button-nav">
-    <div class="line"/>
+    <div class="line" style="margin-top: 0"/>
     <div class="nav-layout">
       <div class="block"/>
       <div class="align">
@@ -9,9 +9,9 @@
       </div>
       <div class="nav" v-for="nav in navConfigRef" :key="nav.title">
         <span class="title" style="font-weight: 550">{{nav.title}}</span>
-        <div class="route" v-for="route in nav.routes" :key="route.title">
+        <router-link :to="route.route" class="route" v-for="route in nav.routes" :key="route.title">
           <span class="title">{{route.title}}</span>
-        </div>
+        </router-link>
       </div>
       <div class="link">
         <md-icon-button :aria-label="link.name" v-for="link in linksRef" :key="link.name" @click="navClick(link.url)">
@@ -22,7 +22,7 @@
     </div>
     <div class="line"/>
     <span class="company">@ Nothing Tech Company</span>
-    <div class="line"/>
+    <div class="line" style="margin-bottom: 0"/>
   </div>
 </template>
 
@@ -61,23 +61,23 @@ export default defineComponent({
     }])
 
     const linksRef = ref([{
-      svg: "X.svg",
+      svg: "icons/X.svg",
       name: "X",
       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }, {
-      svg: "fb.svg",
+      svg: "icons/fb.svg",
       name: "Facebook",
       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }, {
-      svg: "line.svg",
+      svg: "icons/line.svg",
       name: "Line",
       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }, {
-      svg: "ig.svg",
+      svg: "icons/ig.svg",
       name: "Instagram",
       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }, {
-      svg: "youtube.svg",
+      svg: "icons/youtube.svg",
       name: "Youtube",
       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }])
@@ -96,6 +96,7 @@ export default defineComponent({
 .button-nav
   display flex
   flex-direction column
+  background-color var(--md-sys-color-on-primary)
   .line
     width 100%
     height 1px
@@ -121,6 +122,11 @@ export default defineComponent({
         margin-block 4px
       .route
         display flex
+        text-decoration-color underline
+        color var(--md-sys-color-primary)
+        &:hover
+          .title
+            font-weight 550
     .align
       margin-top 8px
       height fit-content

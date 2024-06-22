@@ -12,7 +12,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'login',
     component: LoginView,
-    meta: {hideNav: true}
+    meta: {type: "login", hideNav: true}
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: LoginView,
+    meta: {type: "register", hideNav: true}
   }
 ]
 

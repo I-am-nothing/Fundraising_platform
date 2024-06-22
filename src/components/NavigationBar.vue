@@ -74,7 +74,7 @@ export default defineComponent({
   box-sizing border-box
   height var(--navbar-height)
   box-shadow 0 1px 8px 0 rgba(0, 0, 0, .25)
-  background-color var(--md-sy-color-on-primary)
+  background-color var(--md-sys-color-on-primary)
   display flex
   justify-content space-between
   align-items center
