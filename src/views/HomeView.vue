@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="main-container" ref="uiMainContainerRef">
-      <div class="card" v-for="card in getMainCards()" :key="card.id">
+      <router-link :to="`/product/${card.id}`" class="card" v-for="card in getMainCards()" :key="card.id">
         <img class="image" :src="card.image" alt="logo"/>
         <div class="title-container">
           <span class="title">{{card.title}}</span>
@@ -10,7 +10,7 @@
             <span class="money">NT$ {{card.amount}}</span>
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
     <div class="main-pos">
       <button class="button" v-for="(card, index) in getMainCards()" :key="card.id" @click="showMainCard(index)">
@@ -86,13 +86,25 @@ export default defineComponent({
       supporters: "8,787",
       amount: "878,787",
     }, {
-      id: "0002",
+      id: "0001",
       image: require('../assets/images/home_02.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fasfasdfdasfdas',
       supporters: "8,787",
       amount: "878,787",
-    },{
-      id: "0003",
+    }, {
+      id: "0001",
+      image: require('../assets/images/home_01.jpg'),
+      title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
+      supporters: 8787,
+      amount: 878787,
+    }, {
+      id: "0001",
+      image: require('../assets/images/home_01.jpg'),
+      title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
+      supporters: 8787,
+      amount: 878787,
+    }, {
+      id: "0001",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
       supporters: 8787,
@@ -119,7 +131,7 @@ export default defineComponent({
       supporters: "8,787",
       remainDays: 30,
     }, {
-      id: "0002",
+      id: "0001",
       image: require('../assets/images/home_02.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fasfasdfdasfdas',
       progress: 50,
@@ -127,7 +139,7 @@ export default defineComponent({
       supporters: "8,787",
       remainDays: 30,
     },{
-      id: "0003",
+      id: "0001",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
       progress: 25,
@@ -164,6 +176,15 @@ export default defineComponent({
         })
       }
     }
+
+    setInterval(() => {
+      if (currentMainCardIndex.value < mainCardsRef.value.length - 1) {
+        currentMainCardIndex.value += 1
+      } else {
+        currentMainCardIndex.value = 0
+      }
+      showMainCard(currentMainCardIndex.value)
+    }, 5000)
 
     return {
       getMainCards, getCategories, getPageProducts, showMainCard,
@@ -323,6 +344,7 @@ export default defineComponent({
       flex-direction row
       overflow hidden
       .card
+        text-decoration none
         flex 1 0 100%
         margin-right 24px
         transition transform 0.5s ease
