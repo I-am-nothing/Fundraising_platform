@@ -124,6 +124,12 @@ export default defineComponent({
       return route.meta.type;
     });
 
+    authService.checkLogin().then((user: AuthUser) => {
+      router.push("/")
+    }).catch((reason) => {
+      console.log(reason)
+    })
+
     function getInputConfig() {
       return type.value == "login"? loginInputConfigRef.value : registerInputConfigRef.value
     }
