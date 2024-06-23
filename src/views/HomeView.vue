@@ -80,19 +80,19 @@ export default defineComponent({
   components: {},
   setup() {
     const mainCardsRef = ref([{
-      id: "01",
+      id: "0001",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習',
       supporters: "8,787",
       amount: "878,787",
     }, {
-      id: "02",
+      id: "0002",
       image: require('../assets/images/home_02.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fasfasdfdasfdas',
       supporters: "8,787",
       amount: "878,787",
     },{
-      id: "03",
+      id: "0003",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
       supporters: 8787,
@@ -111,7 +111,7 @@ export default defineComponent({
     }]);
 
     const productsRef = ref([{
-      id: "01",
+      id: "0001",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習',
       progress: 87,
@@ -119,7 +119,7 @@ export default defineComponent({
       supporters: "8,787",
       remainDays: 30,
     }, {
-      id: "02",
+      id: "0002",
       image: require('../assets/images/home_02.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fasfasdfdasfdas',
       progress: 50,
@@ -127,7 +127,7 @@ export default defineComponent({
       supporters: "8,787",
       remainDays: 30,
     },{
-      id: "03",
+      id: "0003",
       image: require('../assets/images/home_01.jpg'),
       title: 'Nothing 專案募資即將調漲【Vue3 + Typescript 教學募資】，輕松學習 fafdasfasdfsdaf ',
       progress: 25,
@@ -231,6 +231,8 @@ export default defineComponent({
           .money
             font-size var(--md-sys-fontsize-title-medium)
           .right
+            display flex
+            align-items center
             .icon
               margin-right 4px
               --md-icon-size 16px

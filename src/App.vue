@@ -5,24 +5,25 @@
 </template>
 
 <script lang="ts">
-import "@material/web/button/filled-button.js";
-import "@material/web/button/filled-tonal-button.js";
-import "@material/web/button/outlined-button.js";
-import "@material/web/button/text-button.js";
-import "@material/web/checkbox/checkbox.js";
-import "@material/web/divider/divider.js";
-import "@material/web/fab/fab.js";
-import "@material/web/icon/icon.js";
-import "@material/web/iconbutton/icon-button.js";
-import "@material/web/iconbutton/filled-icon-button.js";
-import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import "@material/web/iconbutton/outlined-icon-button.js";
-import "@material/web/progress/linear-progress.js";
-import "@material/web/ripple/ripple.js";
-import "@material/web/slider/slider.js";
-import "@material/web/switch/switch.js";
-import "@material/web/tabs/tabs.js";
-import "@material/web/textfield/outlined-text-field.js"
+import "@material/web/button/filled-button";
+import "@material/web/button/filled-tonal-button";
+import "@material/web/button/outlined-button";
+import "@material/web/button/text-button";
+import "@material/web/checkbox/checkbox";
+import "@material/web/divider/divider";
+import "@material/web/fab/fab";
+import "@material/web/icon/icon";
+import "@material/web/iconbutton/icon-button";
+import "@material/web/iconbutton/filled-icon-button";
+import "@material/web/iconbutton/filled-tonal-icon-button";
+import "@material/web/iconbutton/outlined-icon-button";
+import "@material/web/progress/linear-progress";
+import "@material/web/progress/circular-progress";
+import "@material/web/ripple/ripple";
+import "@material/web/slider/slider";
+import "@material/web/switch/switch";
+import "@material/web/tabs/primary-tab";
+import "@material/web/textfield/outlined-text-field"
 
 import NavigationBar from "@/components/NavigationBar.vue";
 import BottomNavigation from "@/components/ButtonNavigation.vue";
@@ -218,6 +219,8 @@ body
   --md-sys-fontsize-headline-large 26px
   --md-sys-fontsize-title-large 18px
   --md-sys-fontsize-title-medium 14px
+  --md-sys-fontsize-title-small 12px
+  --md-sys-fontsize-body-medium 14px
   --md-sys-fontsize-label-large 14px
 
   --md-icon-font: "Material Symbols Rounded"
