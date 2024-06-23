@@ -24,7 +24,9 @@
           </router-link>
           <span class="normal">。</span>
         </div>
-        <md-outlined-text-field class="top-margin" v-for="input in getInputConfig()" :key="input.label"
+        <md-outlined-text-field class="top-margin" v-for="(input, index) in getInputConfig()" :key="input.label"
+                                @input="(event: Event) => updateTextFieldValue(index, event)"
+                                :type="input.type"
                                 :label="input.label" :value="input.value"
                                 :error="input.error != ''" :error-text="input.error">
           <md-icon slot="leading-icon">{{input.icon}}</md-icon>
@@ -39,13 +41,16 @@
           </router-link>
         </div>
         <div v-else style="height: 4px"/>
-        <md-filled-button class="button">{{getTypeString()}}</md-filled-button>
+        <md-filled-button @click="summit()" class="button">{{getTypeString()}}</md-filled-button>
         <div class="top-margin" style="text-align: center">
           <span class="normal">繼續進行代表你同意</span>
           <router-link to="/policy">
             <span class="normal primary-color underline">服務條款</span>
           </router-link>
           <span class="normal">。</span>
+        </div>
+        <div v-if="errorMsgRef != ''" class="top-margin" style="text-align: center">
+          <span class="normal" style="color: var(--md-sys-color-error)">{{errorMsgRef}}</span>
         </div>
       </div>
     </div>
@@ -56,19 +61,28 @@
 import {computed, defineComponent, ref} from "vue";
 import ColorIcon from "@/components/ColorIcon.vue";
 import {useRoute} from "vue-router";
+import {AuthService} from "@/service/auth/AuthService";
+import {AuthUser} from "@/service/auth/data/Type";
+import router from "@/router";
 
 export default defineComponent({
   name: 'BottomNavigation',
   components: {},
   setup() {
+    const authService = AuthService.create("http://localhost:8080")
+
+    const errorMsgRef = ref("")
+
     const loginInputConfigRef = ref([{
       label: '電子信箱',
       icon: 'email',
+      type: 'email',
       value: '',
       error: ''
     }, {
       label: '密碼',
       icon: 'lock_person',
+      type: 'password',
       value: '',
       error: ''
     }])
@@ -76,19 +90,29 @@ export default defineComponent({
     const registerInputConfigRef = ref([{
       label: '電子信箱',
       icon: 'email',
+      type: 'email',
       value: '',
       error: ''
-    },{
+    }, {
+      label: '姓名',
+      type: 'text',
+      icon: 'person',
+      value: '',
+      error: ''
+    }, {
+      type: 'text',
       label: '電話',
       icon: 'phone',
       value: '',
       error: ''
     }, {
+      type: 'password',
       label: '密碼',
       icon: 'lock_person',
       value: '',
       error: ''
     }, {
+      type: 'password',
       label: '確認密碼',
       icon: 'lock_person',
       value: '',
@@ -112,7 +136,143 @@ export default defineComponent({
       return (type.value == "login")? "登入" : "註冊"
     }
 
-    return {getInputConfig, getType, getTypeString}
+    function updateTextFieldValue(index: number, event: Event) {
+      if (type.value == "login") {
+        loginInputConfigRef.value[index].value = (event.target as HTMLInputElement).value
+      } else {
+        registerInputConfigRef.value[index].value = (event.target as HTMLInputElement).value
+      }
+    }
+
+    function summit() {
+      let inputValid = true
+      errorMsgRef.value = ""
+      if (type.value == "login") {
+        const email = loginInputConfigRef.value[0].value
+        const password = loginInputConfigRef.value[1].value
+
+        // check email is valid or not
+        if (email == "") {
+          loginInputConfigRef.value[0].error = "請輸入電子信箱"
+          inputValid = false
+        } else {
+          loginInputConfigRef.value[0].error = ""
+        }
+
+        // check password is valid or not
+        if (password == "") {
+          loginInputConfigRef.value[1].error = "請輸入密碼"
+          inputValid = false
+        } else {
+          loginInputConfigRef.value[1].error = ""
+        }
+
+        if (!inputValid) {
+          return
+        }
+
+        authService.login(email, password).then((authUser: AuthUser) => {
+          console.log(authUser)
+          router.push("/")
+        }).catch((reason) => {
+          console.log(reason)
+          if (reason == undefined) {
+            errorMsgRef.value = "伺服器錯誤"
+          }
+          else {
+            errorMsgRef.value = reason
+          }
+          router.push("/")
+        })
+      } else {
+        const email = registerInputConfigRef.value[0].value
+        const name = registerInputConfigRef.value[1].value
+        const phone = registerInputConfigRef.value[2].value
+        const password = registerInputConfigRef.value[3].value
+        const confirmPassword = registerInputConfigRef.value[4].value
+
+
+        // check email is valid or not
+        if (email == "") {
+          registerInputConfigRef.value[0].error = "請輸入電子信箱"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[0].error = ""
+        }
+        if (!email.includes("@")) {
+          registerInputConfigRef.value[0].error = "電子信箱格式錯誤"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[0].error = ""
+        }
+
+        // check name is valid or not
+        if (name == "") {
+          registerInputConfigRef.value[1].error = "請輸入姓名"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[1].error = ""
+        }
+
+        // check phone is valid or not
+        if (phone == "") {
+          registerInputConfigRef.value[2].error = "請輸入電話"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[2].error = ""
+        }
+        if (phone.length != 10) {
+          registerInputConfigRef.value[2].error = "電話格式錯誤"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[2].error = ""
+        }
+
+        // check password is valid or not
+        if (password == "") {
+          registerInputConfigRef.value[3].error = "請輸入密碼"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[3].error = ""
+        }
+        if (password.length < 6) {
+          registerInputConfigRef.value[3].error = "密碼長度需大於6"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[3].error = ""
+        }
+
+        // check confirmPassword is valid or not
+        if (confirmPassword == "") {
+          registerInputConfigRef.value[4].error = "請輸入確認密碼"
+          inputValid = false
+        } else if (confirmPassword != password) {
+          registerInputConfigRef.value[4].error = "密碼不一致"
+          inputValid = false
+        } else {
+          registerInputConfigRef.value[4].error = ""
+        }
+
+        if (!inputValid) {
+          return
+        }
+
+        authService.register(email, name, phone, password, confirmPassword).then((authUser: AuthUser) => {
+          console.log(authUser)
+          router.push("/")
+        }).catch((reason) => {
+          console.log(reason)
+          if (reason == undefined) {
+            errorMsgRef.value = "伺服器錯誤"
+          }
+          else {
+            errorMsgRef.value = reason
+          }
+        })
+      }
+    }
+
+    return {getInputConfig, getType, getTypeString, summit, errorMsgRef, updateTextFieldValue}
   }
 })
 

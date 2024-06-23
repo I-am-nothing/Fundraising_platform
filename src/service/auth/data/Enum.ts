@@ -1,0 +1,15 @@
+export enum AuthFailed {
+    INVALID_EMAIL = "auth/invalid-email",
+    USER_NOT_FOUND = "auth/user-not-found",
+    WRONG_PASSWORD = "auth/wrong-password",
+    EMAIL_EXISTS = "auth/email-already-in-use",
+    WEAK_PASSWORD = "auth/weak-password",
+    INVALID_PHONE_NUMBER = "auth/invalid-phone-number",
+    SESSION_EXPIRED = "auth/session-expired",
+    ACCOUNT_DISABLED = "auth/user-disabled",
+    TOO_MANY_REQUESTS = "auth/too-many-requests",
+    EMAIL_NOT_VERIFIED = "auth/email-not-verified",
+    USER_NOT_LOGGED_IN = "auth/user-not-logged-in",
+    SESSION_NOT_FOUND = "auth/session-not-found",
+    PASSWORD_NOT_MATCH = "auth/password-not-match",
+}
