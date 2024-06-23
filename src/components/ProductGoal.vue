@@ -30,6 +30,15 @@ import {computed, defineComponent, ref} from "vue";
 import ColorIcon from "@/components/ColorIcon.vue";
 import {useRoute} from "vue-router";
 
+/**
+ * product goal
+ * @param goalPercent
+ * @param goal
+ * @param current
+ * @param remain
+ * @param founders
+ * @example <product-goal goalPercent="87" goal="000,000" current="000,000" remain="0" founders="0"/>
+ */
 export default defineComponent({
   name: 'ProductGoal',
   components: {},

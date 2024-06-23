@@ -30,6 +30,10 @@
 import {defineComponent, ref} from "vue";
 import ColorIcon from "@/components/ColorIcon.vue";
 
+
+/**
+ * footer navigation bar
+ */
 export default defineComponent({
   name: 'BottomNavigation',
   components: {ColorIcon},

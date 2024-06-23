@@ -57,6 +57,9 @@
 import {defineComponent} from "vue";
 import ColorIcon from "@/components/ColorIcon.vue";
 
+/**
+ * navigation bar
+ */
 export default defineComponent({
   name: 'NavigationBar',
   components: {},

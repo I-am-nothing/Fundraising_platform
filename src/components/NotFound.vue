@@ -34,6 +34,12 @@ import {computed, defineComponent, ref} from "vue";
 import ColorIcon from "@/components/ColorIcon.vue";
 import {useRoute} from "vue-router";
 
+/**
+ * not found page
+ * @param title - main title of the page
+ * @example
+ *   <NotFound title="找不到此頁面"/>
+ */
 export default defineComponent({
   name: 'NotFound',
   components: {},
