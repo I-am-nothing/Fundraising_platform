@@ -72,12 +72,12 @@
           <div v-if="item.type == 'label-text'" class="description">
             <span v-for="(line, idx) in item.description" :key="idx">{{line}}<br></span>
           </div>
-          <Bar v-else-if="item.type == 'earnings'"
-              style="aspect-ratio: 16/9; flex: 1"
-              :options="chartOptionsRef"
-              :data="chartDataRef">
-          </Bar>
-
+          <div class="chart" v-else-if="item.type == 'earnings'">
+            <Bar
+                 :options="chartOptionsRef"
+                 :data="chartDataRef">
+            </Bar>
+          </div>
         </div>
         <div style="height: 24px"/>
       </div>
@@ -376,6 +376,10 @@ export default defineComponent({
 
     .left
       margin-left 48px
+      .chart
+        display flex
+        height 25vh
+        width: calc(100% - 4px)
       .contents-layout
         border-radius 24px
         overflow hidden
